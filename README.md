@@ -8,11 +8,11 @@
 
 
  **Project objective:**
-    Checked ad-hoc-requests for which the business needs insights.
+  **1.** Checked ad-hoc-requests for which the business needs insights.
     
-    Performed a SQL query using MySQL to answer these requests.
+  **2.** Performed a SQL query using MySQL to answer these requests.
     
-    Created a reports and export it into csv file so that it can be used for visualisation.
+  **3.** Created a reports and export it into csv file so that it can be used for visualisation.
 
 
 **Resources provided**
