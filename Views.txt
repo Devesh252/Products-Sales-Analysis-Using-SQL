@@ -1,0 +1,54 @@
+--- create view for sales_preinv_discount
+
+select 
+    fsm.date,
+    fsm.fiscal_year,
+    fsm.product_code,
+    fsm.customer_code,
+    p.product,
+    p.variant,
+    fsm.sold_quantity,
+    fgp.gross_price,
+    round(fsm.sold_quantity*fgp.gross_price,2) as total_gross_price,
+    pre.pre_invoice_discount_pct
+    
+from fact_sales_monthly fsm
+join dim_product p	
+on fsm.product_code = p.product_code
+join fact_gross_price fgp
+on fgp.product_code = fsm.product_code and 
+   fgp.fiscal_year = fsm.fiscal_year
+join fact_pre_invoice_deductions pre
+on pre.customer_code = fsm.customer_code and 
+   pre.fiscal_year = fsm.fiscal_year
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--- create view for sales_postinv_discount
+
+select 
+	prv.date, prv.fiscal_year,
+    prv.customer_code,prv.market,
+    prv.product_code,prv.product,
+    prv.variant,prv.sold_quantity,prv.total_gross_price,
+    prv.pre_invoice_discount_pct,
+    (prv.total_gross_price-prv.pre_invoice_discount_pct*total_gross_price) as net_invoice_sales,
+    (po.discounts_pct+po.other_deductions_pct) as post_invoice_deduction_pct
+from sales_preinv_discount prv
+join fact_post_invoice_deductions po
+on prv.date = po.date and 
+   prv.customer_code = po.customer_code and
+   prv.product_code = po.product_code
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--- create view for net_sales
+
+select 
+      *,
+      (1-post_invoice_deduction_pct)*net_invoice_sales as net_sales
+from sales_postinv_discount	 
