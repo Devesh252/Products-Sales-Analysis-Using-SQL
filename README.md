@@ -9,7 +9,9 @@
 
  **Project objective:**
     Checked ad-hoc-requests for which the business needs insights.
+    
     Performed a SQL query using MySQL to answer these requests.
+    
     Created a reports and export it into csv file so that it can be used for visualisation.
 
 
@@ -53,7 +55,6 @@
 
 
 
-    
 
 - **Purpose of sales analytics:** Empower businesses to monitor and evaluate their sales activities and performance.
 
@@ -78,12 +79,3 @@
 
 
 
-
-
-
-Tasks:
-I imagined as an applicant for this role and performed the following tasks:
-
-Checked ad-hoc-requests for which the business needs insights.
-Performed a SQL query using MySQL to answer these requests.
-Created a presentation to show the insights for the management.
